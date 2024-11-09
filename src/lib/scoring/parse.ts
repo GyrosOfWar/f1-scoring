@@ -3,7 +3,7 @@ import type { RaceResult } from ".";
 import * as fs from "fs/promises";
 
 async function parseFeatureRaceResults(): Promise<RaceResult[]> {
-  const fileContent = await fs.readFile("race_results.csv", {
+  const fileContent = await fs.readFile("data/race_results.csv", {
     encoding: "utf-8",
   });
   const csv: string[][] = parse(fileContent);
@@ -28,7 +28,7 @@ async function parseFeatureRaceResults(): Promise<RaceResult[]> {
 }
 
 async function parseSprintRaceResults(): Promise<RaceResult[]> {
-  const fileContent = await fs.readFile("sprint_results.csv", {
+  const fileContent = await fs.readFile("data/sprint_results.csv", {
     encoding: "utf-8",
   });
   const csv: string[][] = parse(fileContent);

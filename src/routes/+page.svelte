@@ -71,7 +71,7 @@
   </select>
 </section>
 
-<section class="flex flex-col lg:flex-row gap-2">
+<section class="flex flex-col gap-2 lg:flex-row">
   <section class="relative flex grow flex-col gap-1">
     <h2 class="mb-2 text-center text-2xl font-bold">Drivers</h2>
     {#each driverStandings as driver}
@@ -106,3 +106,10 @@
     {/each}
   </section>
 </section>
+
+<footer class="w-full py-4 text-center">
+  Credit for the data to <a
+    href="https://github.com/toUpperCase78/formula1-datasets"
+    class="link link-primary">toUpperCase78</a
+  > on GitHub.
+</footer>
