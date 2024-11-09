@@ -181,6 +181,33 @@ export function getDriverStandings(
   return standings;
 }
 
+export interface ConstructorStanding {
+  name: string;
+  points: number;
+}
+
+export function getConstructorStandings(
+  constructors: Set<string>,
+  driverStandings: DriverStanding[],
+): ConstructorStanding[] {
+  const standings: ConstructorStanding[] = [];
+
+  constructors.forEach((constructor) => {
+    const totalPoints = driverStandings
+      .filter((standing) => standing.driver.team === constructor)
+      .map((standing) => standing.points)
+      .reduce((acc, points) => acc + points, 0);
+
+    standings.push({
+      name: constructor,
+      points: totalPoints,
+    });
+  });
+
+  standings.sort((a, b) => b.points - a.points);
+  return standings;
+}
+
 export function getDrivers(raceResults: RaceResult[]): Driver[] {
   const drivers: Driver[] = [];
 
@@ -245,3 +272,16 @@ export const teamColors: Record<string, { background: string; text: string }> =
       text: "#FFF",
     },
   };
+
+export const shortTeamNames: Record<string, string> = {
+  "Red Bull Racing Honda RBPT": "Red Bull",
+  Ferrari: "Ferrari",
+  Mercedes: "Mercedes",
+  "McLaren Mercedes": "McLaren",
+  "Aston Martin Aramco Mercedes": "Aston Martin",
+  "Kick Sauber Ferrari": "Kick Sauber",
+  "Haas Ferrari": "Haas",
+  "RB Honda RBPT": "VCARB",
+  "Williams Mercedes": "Williams",
+  "Alpine Renault": "Alpine",
+};

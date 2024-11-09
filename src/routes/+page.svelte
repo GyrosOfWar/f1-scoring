@@ -1,10 +1,13 @@
 <script lang="ts">
   import {
     Default2024ScoringSystem,
+    getConstructorStandings,
     getDrivers,
     getDriverStandings,
     LinearScoringSystem,
+    shortTeamNames,
     teamColors,
+    type ConstructorStanding,
     type DriverStanding,
     type RaceResult,
   } from "$lib/scoring";
@@ -21,10 +24,23 @@
       data.raceResults,
     ),
   );
+  let constructors = $derived(
+    new Set(data.raceResults.map((r) => r.data.team)),
+  );
 
-  function getWidth(driver: DriverStanding): string {
+  let constructorsStandings = $derived(
+    getConstructorStandings(constructors, driverStandings),
+  );
+
+  function getDriverWidth(driver: DriverStanding): string {
     const maxPoints = driverStandings[0].points;
     const width = (driver.points / maxPoints) * 100;
+    return `${width}%`;
+  }
+
+  function getConstructorWidth(constructor: ConstructorStanding): string {
+    const maxPoints = constructorsStandings[0].points;
+    const width = (constructor.points / maxPoints) * 100;
     return `${width}%`;
   }
 </script>
@@ -55,16 +71,38 @@
   </select>
 </section>
 
-<section class="relative flex flex-col gap-1">
-  {#each driverStandings as driver}
-    <div
-      class="truncate p-2"
-      title={driver.driver.name}
-      style="width: {getWidth(driver)}; background-color: {teamColors[
-        driver.driver.team
-      ].background}; color: {teamColors[driver.driver.team].text};"
-    >
-      {driver.driver.name} ({driver.driver.team}), {driver.points} pts
-    </div>
-  {/each}
+<section class="flex flex-col lg:flex-row gap-2">
+  <section class="relative flex grow flex-col gap-1">
+    <h2 class="mb-2 text-center text-2xl font-bold">Drivers</h2>
+    {#each driverStandings as driver}
+      <div
+        class="p-2"
+        title={driver.driver.name}
+        style="width: {getDriverWidth(driver)}; background-color: {teamColors[
+          driver.driver.team
+        ].background}; color: {teamColors[driver.driver.team].text};"
+      >
+        <span class="truncate">{driver.driver.name}, {driver.points} pts</span>
+      </div>
+    {/each}
+  </section>
+
+  <section class="relative flex grow flex-col gap-1">
+    <h2 class="mb-2 text-center text-2xl font-bold">Constructors</h2>
+
+    {#each constructorsStandings as constructor}
+      <div
+        class="p-2"
+        title={shortTeamNames[constructor.name]}
+        style="width: {getConstructorWidth(
+          constructor,
+        )}; background-color: {teamColors[constructor.name]
+          .background}; color: {teamColors[constructor.name].text};"
+      >
+        <span class="truncate"
+          >{shortTeamNames[constructor.name]}, {constructor.points} pts</span
+        >
+      </div>
+    {/each}
+  </section>
 </section>
