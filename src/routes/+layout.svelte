@@ -3,4 +3,4 @@
   let { children } = $props();
 </script>
 
-{@render children()}
+<main class="container mx-auto mt-4">{@render children()}</main>
