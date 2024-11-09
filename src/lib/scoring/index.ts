@@ -201,3 +201,47 @@ export function getDrivers(raceResults: RaceResult[]): Driver[] {
 
   return drivers;
 }
+
+export const teamColors: Record<string, { background: string; text: string }> =
+  {
+    "Red Bull Racing Honda RBPT": {
+      background: "#0600EF",
+      text: "#FFF",
+    },
+    Ferrari: {
+      background: "#DC0000",
+      text: "#FFF",
+    },
+    Mercedes: {
+      background: "#00D2BE",
+      text: "#000",
+    },
+    "McLaren Mercedes": {
+      background: "#FF8700",
+      text: "#000",
+    },
+    "Aston Martin Aramco Mercedes": {
+      background: "#006F62",
+      text: "#FFF",
+    },
+    "Kick Sauber Ferrari": {
+      background: "#9B0000",
+      text: "#FFF",
+    },
+    "Haas Ferrari": {
+      background: "#EFEFEF",
+      text: "#000",
+    },
+    "RB Honda RBPT": {
+      background: "#0600EF",
+      text: "#FFF",
+    },
+    "Williams Mercedes": {
+      background: "#005AFF",
+      text: "#FFF",
+    },
+    "Alpine Renault": {
+      background: "#0090FF",
+      text: "#FFF",
+    },
+  };
