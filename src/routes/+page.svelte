@@ -45,6 +45,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>F1 scoring</title>
+</svelte:head>
+
 <section class="prose mb-4 max-w-none">
   <h1>F1 scoring</h1>
   {#if scoringSystem === "default"}
@@ -108,8 +112,14 @@
 </section>
 
 <footer class="w-full py-4 text-center">
-  Credit for the data to <a
-    href="https://github.com/toUpperCase78/formula1-datasets"
-    class="link link-primary">toUpperCase78</a
-  > on GitHub.
+  <p>
+    Source code available on <a href="https://github.com/GyrosOfWar/f1-scoring" class="link link-primary">GitHub</a>.
+  </p>
+
+  <p>
+    Credit for the data to <a
+      href="https://github.com/toUpperCase78/formula1-datasets"
+      class="link link-primary">toUpperCase78</a
+    > on GitHub.
+  </p>
 </footer>
